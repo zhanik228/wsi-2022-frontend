@@ -6,8 +6,17 @@ const useGames = ({ page = 0, size = 10, sortBy = 'title', sortDir = 'asc' }) =>
     const [availableGames, setAvailableGames] = useState(0)
     const [isLoading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(false);
-    const [gameContents, setGameContents] = useState([])
+    const [gameContents, setGameContents] = useState([]);
 
+    useEffect(() => {
+        setGameContents([]);
+
+        localStorage.setItem('sort_settings', JSON.stringify({
+            sortBy,
+            sortDir
+        }))
+    }, [sortDir, sortBy])
+    
     useEffect(() => {
         const fetchGames = async () => {
             try {
@@ -16,17 +25,16 @@ const useGames = ({ page = 0, size = 10, sortBy = 'title', sortDir = 'asc' }) =>
                 if (!response.ok) {
                     throw new Error('Failed to fetch games');
                 }
-                const gamesData = await response.json()
-                console.log(gameContents)
-                setAvailableGames(gamesData.totalElements)
+                const gamesData = await response.json();
+                setAvailableGames(gamesData.totalElements);
                 setGameContents(prevContents => {gamesData.content.map((game) => prevContents.push(game)); return prevContents});
-                setHasMore(gamesData.content.length > 0)
-                setLoading(false)
+                setHasMore(gamesData.content.length > 0);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching games:', error);
-                setLoading(false)
+                setLoading(false);
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
         };
 

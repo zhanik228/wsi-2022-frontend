@@ -1,27 +1,28 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useGames from "../../hooks/useGames";
 
-import GameCard from "../../components/GameCard";
 import GameList from "../../components/GameList";
+import Filter from "../../components/Filter";
 
 
 const GamesPage = () => {
+    useEffect(() => {
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        }
+    }, []);
     const [page, setPage] = useState(0);
     const [size, setSize] = useState();
-    const [sortBy, setSortBy] = useState();
-    const [sortDir, setSortDir] = useState();
+    const [sortBy, setSortBy] = useState('title' || JSON.parse(localStorage.getItem('sort_settings')).sortBy);
+    const [sortDir, setSortDir] = useState('asc' || JSON.parse(localStorage.getItem('sort_settings')).sortDir);
     const { availableGames, isLoading, hasMore, gameContents } = useGames( { page, size, sortBy, sortDir } );
 
     const observer = useRef(null);
     const lastCardRef = useRef(null);
-    
-    const lastCardStyles = useMemo(() => {
-        return {
-          position: 'sticky',
-          bottom: 0,
-          width: "100%",
-        };
-      }, []);
+
+    useEffect(() => {
+        console.log('sortBy: ' + sortBy, 'sortDir: ' + sortDir);
+    }, [sortBy, sortDir])
 
     useEffect(() => {
         if (isLoading) return
@@ -51,8 +52,8 @@ const GamesPage = () => {
 
     return (
         <>
-            <h1 className="p-2">Available Games: { availableGames }</h1>
-            <GameList games={ gameContents } lastCardRef={ lastCardRef } lastCardStyles={ lastCardStyles } isLoading={ isLoading } />
+            <Filter filterBy={ sortBy } filterDir={ sortDir } availableGames={ availableGames } setFilterBy={ setSortBy } setFilterDir={ setSortDir } />
+            <GameList games={ gameContents } lastCardRef={ lastCardRef } isLoading={ isLoading } />
         </>
     );
 }
