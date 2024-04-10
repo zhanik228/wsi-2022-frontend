@@ -10,7 +10,7 @@ const GameList = ( { games, lastCardRef, lastCardStyles, isLoading } ) => {
     }
 
     return (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-2">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
             {games.map((game, index) => (
                 <GameCard key={ game.slug } ref={ index === games.length - 1 ? lastCardRef : null } game={ game } />
             ))}

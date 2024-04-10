@@ -9,7 +9,9 @@ const RegisterPage = () => {
     const [errors, setErrors] = useState([])
 
     useEffect(() => {
-        router.navigate('/');
+        if (localStorage.getItem('token')) {
+            router.navigate('/');
+        }
     });
 
     const handleSubmit = async (e) => {
@@ -26,15 +28,19 @@ const RegisterPage = () => {
 
             const resData = await res.json();
 
+                        // если запрос провалился показать ошибки
             if (!res.ok) {
                 for (let i in resData.violations) {
                     const newError = i + ': ' + resData.violations[i].message;
                     setErrors([])
                     setErrors((prevErrors) => [...prevErrors, newError])
                 }
+                return;
             }
 
             localStorage.setItem('token', resData.token);
+            localStorage.setItem('username', username)
+            router.navigate(0)
 
         } catch (error) {
             console.log(error.message)

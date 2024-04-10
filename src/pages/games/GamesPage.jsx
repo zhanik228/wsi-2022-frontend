@@ -6,17 +6,20 @@ import Filter from "../../components/Filter";
 
 
 const GamesPage = () => {
+    // всегда держать скролл когда обновлено на вверху
     useEffect(() => {
         window.onload = function() {
             window.scrollTo(0, 0);
         }
     }, []);
+    
     const [page, setPage] = useState(0);
     const [size, setSize] = useState();
-    const [sortBy, setSortBy] = useState('title' || JSON.parse(localStorage.getItem('sort_settings')).sortBy);
-    const [sortDir, setSortDir] = useState('asc' || JSON.parse(localStorage.getItem('sort_settings')).sortDir);
+    const [sortBy, setSortBy] = useState(JSON.parse(localStorage.getItem('sort_settings')).sortBy || 'title');
+    const [sortDir, setSortDir] = useState(JSON.parse(localStorage.getItem('sort_settings')).sortDir || 'asc');
     const { availableGames, isLoading, hasMore, gameContents } = useGames( { page, size, sortBy, sortDir } );
 
+    // для отслеживания последнего элемента игр
     const observer = useRef(null);
     const lastCardRef = useRef(null);
 

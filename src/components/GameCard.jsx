@@ -8,7 +8,7 @@ import React from "react";
 const GameCard = React.forwardRef(({ game }, ref) => {
     return (
         <li className="rounded overflow-hidden game-card" ref={ ref }>
-            <img className="object-cover w-full h-[400px] block" src={ `${BASE_URL}/game/` + game.slug + '/thumbnail.png' } alt={ 'image for ' + game.title } />
+            <img className="object-cover w-full h-[200px] sm:h-[400px] block" src={ `${BASE_URL}/game/` + game.slug + '/thumbnail.png' } alt={ 'image for ' + game.title } />
             <div className="relative">
                 <div className="bg-gray-800 absolute bottom-[85%] left-2 p-1 rounded-full">
                     <Badge color={'bg-red-500'}>Game</Badge>
@@ -27,7 +27,7 @@ const GameCard = React.forwardRef(({ game }, ref) => {
                         { game.author }
                     </div>
                     <div className="w-[1px] bg-white opacity-50"></div>
-                    <Link to={'game'} className="px-3 py-1 mx-2 bg-green-400 rounded-full">Play</Link>
+                    <Link to={'/game/' + game.slug} className="px-3 py-1 mx-2 bg-green-400 rounded-full">Play</Link>
                 </div>
             </div>
         </li>

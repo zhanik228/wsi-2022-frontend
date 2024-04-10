@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { GAMES_URL } from "../services/api/constants";
 
-const useGames = ({ page = 0, size = 10, sortBy = 'title', sortDir = 'asc' }) => {
+const useGames = ({ page = 0, size = 10, sortBy, sortDir }) => {
     const [availableGames, setAvailableGames] = useState(0)
     const [isLoading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(false);

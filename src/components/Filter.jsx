@@ -30,7 +30,7 @@ const Filter = ({ availableGames, filterBy, setFilterBy, filterDir, setFilterDir
     return (
         <div className="p-2 sm:flex justify-between gap-5">
             <h1>Available Games: { availableGames }</h1>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
                 <Select selectedValue={ filterBy } title="Sort By..." options={ options } setSelected={ setFilterBy } />
                 <Select selectedValue={ filterDir } title="Sort Direction..." options={ filterDirOptions } setSelected={ setFilterDir } />
             </div>

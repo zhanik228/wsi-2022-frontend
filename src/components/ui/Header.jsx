@@ -1,7 +1,10 @@
 import { NavLink, Link } from "react-router-dom";
 import Nav from "./Nav";
+import { useState } from "react";
 
 const Header = () => {
+    const [token, setToken] = useState(localStorage.getItem('token') || null)
+
     return (
         <header 
             className="
@@ -29,22 +32,46 @@ const Header = () => {
             <Nav />
             </div>
             <div className="mt-4 sm:mt-0 flex justify-center sm:justify-start items-center gap-4">
-                <NavLink
-                    to={'login'} 
-                    className="text-white text-sm "
-                >Log in</NavLink>
-                <NavLink
-                    to={'signup'}
-                    className="
-                        text-white 
-                        text-sm 
-                        bg-indigo-600 
-                        px-2 py-1 rounded
-                        hover:opacity-[0.9]
-                        hover:*:opacity-100
-                    "
-                >Sign up
-                </NavLink>
+                {token ?
+                    <>
+                    <span className="text-white px-1 text-md bg-slate-700 rounded">{ localStorage.getItem('username')}</span>
+                    <form method="POST">
+                        <NavLink
+                            to={'signout'}
+                            className="
+                                text-white 
+                                text-sm 
+                                bg-indigo-600 
+                                px-2 py-1 rounded
+                                hover:opacity-[0.9]
+                                hover:*:opacity-100
+                            "
+                        >Sign Out
+                        </NavLink>
+                    </form>
+                    </>
+                : 
+                    (
+                        <>
+                            <NavLink
+                                to={'login'} 
+                                className="text-white text-sm "
+                            >Log in</NavLink>
+                            <NavLink
+                                to={'signup'}
+                                className="
+                                    text-white 
+                                    text-sm 
+                                    bg-indigo-600 
+                                    px-2 py-1 rounded
+                                    hover:opacity-[0.9]
+                                    hover:*:opacity-100
+                                "
+                            >Sign up
+                            </NavLink>
+                        </>
+                    )
+                }
             </div>
         </header>
     );
