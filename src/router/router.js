@@ -10,6 +10,8 @@ import RegisterPage from '../pages/auth/RegisterPage';
 import SignOutPage from '../pages/auth/SignOutPage';
 import LoginPage from '../pages/auth/LoginPage';
 import GamePage from '../pages/games/GamePage';
+import Profile from '../pages/auth/Profile';
+import GameEdit from '../pages/games/GameEdit';
 
 const router = createBrowserRouter([
     {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
             {
                 path: 'game/:slug',
                 element: <GamePage />
+            },
+            {
+                path: 'game/:slug/edit',
+                element: <GameEdit />
+            },
+            {
+                path: 'profile',
+                element: <Profile />
             }
         ]
     }

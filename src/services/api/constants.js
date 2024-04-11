@@ -4,3 +4,4 @@ export const GAMES_URL = `${BASE_API_URL}/games`
 export const REGISTER_URL = `${BASE_API_URL}/auth/signup`
 export const LOGIN_URL = `${BASE_API_URL}/auth/signin`
 export const LOGOUT_URL = `${BASE_API_URL}/auth/signout`
+export const USER_URL = `${BASE_API_URL}/users`

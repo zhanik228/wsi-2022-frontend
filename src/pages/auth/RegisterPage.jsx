@@ -4,8 +4,8 @@ import Input from "../../components/ui/Input";
 import router from "../../router/router";
 
 const RegisterPage = () => {
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([])
 
     useEffect(() => {

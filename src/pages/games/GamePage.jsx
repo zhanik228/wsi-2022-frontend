@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { GAMES_URL, BASE_URL } from '../../services/api/constants';
+import Leaderboard from '../../components/Leaderboard';
 
 const GamePage = () => {
     const [loading, setLoading] = useState(true);
@@ -65,7 +66,9 @@ const GamePage = () => {
         // получить игру и очки
         getGame();
         // getGameFrame()
-        getGameScores();
+        setInterval(() => {
+            getGameScores();
+        }, 5000);
     }, [])
 
     if (loading) {
@@ -78,42 +81,12 @@ const GamePage = () => {
 
     return (
         <div className="p-2">
-            <h2 className='text-2xl'>{ game.title }</h2>
             <div className='shadow rounded-xl bg-gray-800 p-2'>
-                <h3 className='text-center text-white text-xl mb-2'>Game</h3>
+                <h3 className='text-center text-white text-xl mb-2'>{ game.title }</h3>
                 <iframe className='w-full bg-white h-[300px]' src={`${BASE_URL}/game/` + game.slug + '/index.html'}></iframe>
             </div>
             <div className='sm:flex justify-between w-full gap-2 my-2 bg-gray-800 p-2'>
-                <div className='sm:flex-[50%] bg-white p-2'>
-                    <h3 className='bg-gray-800 text-white p-2 rounded'>Top 10 Leaderboard</h3>
-                    {scores.length && scores.map((score, index) => {
-                        if (index >= 10) return;
-                        if (score.username === localStorage.getItem('username')) {
-                            return (
-                                <p 
-                                    key={ score.username }
-                                    className={`font-bold bg-gray-800 text-white rounded my-2 flex justify-between p-2`} 
-                                ><span># {index + 1} You</span> <span>{score.score}</span></p>
-                            )
-                        }
-                        return (
-                            <p 
-                                className='my-2 flex justify-between'
-                                key={ score.username } 
-                            ><span># {index + 1} {score.username}</span> <span>{score.score}</span></p>
-                        )
-                    })}
-                    {userScore
-                        ? 
-                            <p 
-                                className={`font-bold bg-gray-800 text-white rounded my-2 flex justify-between p-2`} 
-                            >
-                                <span>{userScore.username}</span> <span>{userScore.score}</span>
-                            </p>
-                        :
-                        <p></p>
-                    }
-                </div>
+                <Leaderboard title={'Top 10 Leaderboard'} isLimited={ true } scores={ scores } userScore={ userScore } />
                 <div className='sm:flex-[50%] bg-white p-2'>
                     <h3 className='bg-gray-800 text-white p-2 rounded'>Description</h3>
                     <p className='my-2'>{ game.description }</p>

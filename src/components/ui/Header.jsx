@@ -12,10 +12,13 @@ const Header = () => {
                 px-2
                 sm:px-4
                 py-2
-                sm:flex
+                flex
+                flex-col
+                sm:flex-row
                 items-center
                 justify-between
-                gap-4
+                gap-0
+                sm:gap-4
             "
         >
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-10">
@@ -34,7 +37,7 @@ const Header = () => {
             <div className="mt-4 sm:mt-0 flex justify-center sm:justify-start items-center gap-4">
                 {token ?
                     <>
-                    <span className="text-white px-1 text-md bg-slate-700 rounded">{ localStorage.getItem('username')}</span>
+                    <Link to="/profile" className="text-white px-1 text-md bg-slate-700 rounded">{ localStorage.getItem('username')}</Link>
                     <form method="POST">
                         <NavLink
                             to={'signout'}

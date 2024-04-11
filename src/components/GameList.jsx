@@ -1,6 +1,6 @@
 import GameCard from "./GameCard";
 
-const GameList = ( { games, lastCardRef, lastCardStyles, isLoading } ) => {
+const GameList = ( { listTitle, games, lastCardRef, lastCardStyles, isLoading, mode } ) => {
     if (!games?.length) {
         return (
             <h2>
@@ -10,12 +10,15 @@ const GameList = ( { games, lastCardRef, lastCardStyles, isLoading } ) => {
     }
 
     return (
+        <>
+        {listTitle && <h2 className="my-2 px-2">{listTitle}</h2>}
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
             {games.map((game, index) => (
-                <GameCard key={ game.slug } ref={ index === games.length - 1 ? lastCardRef : null } game={ game } />
+                <GameCard mode={ mode } key={ game.slug } ref={ index === games.length - 1 ? lastCardRef : null } game={ game } />
             ))}
             {isLoading && <li><h2>Loading...</h2></li> }
         </ul>
+        </>
     );
 }
 
