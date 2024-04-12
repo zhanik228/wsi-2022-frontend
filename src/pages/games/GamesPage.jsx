@@ -15,8 +15,8 @@ const GamesPage = () => {
     
     const [page, setPage] = useState(0);
     const [size, setSize] = useState();
-    const [sortBy, setSortBy] = useState(JSON.parse(localStorage.getItem('sort_settings')).sortBy || 'title');
-    const [sortDir, setSortDir] = useState(JSON.parse(localStorage.getItem('sort_settings')).sortDir || 'asc');
+    const [sortBy, setSortBy] = useState(JSON.parse(localStorage.getItem('sort_settings'))?.sortBy || 'title');
+    const [sortDir, setSortDir] = useState(JSON.parse(localStorage.getItem('sort_settings'))?.sortDir || 'asc');
     const { availableGames, isLoading, hasMore, gameContents } = useGames( { page, size, sortBy, sortDir } );
 
     // для отслеживания последнего элемента игр
