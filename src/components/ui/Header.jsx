@@ -31,7 +31,7 @@ const Header = () => {
                     sm:text-2xl
                     font-medium
                 "
-            ><Link to='/'>WorldSkills - Frontend</Link></h1>
+            ><Link to='/'>WorldSkills - Games</Link></h1>
             <Nav />
             </div>
             <div className="mt-4 sm:mt-0 flex justify-center sm:justify-start items-center gap-4">
@@ -59,7 +59,7 @@ const Header = () => {
                             <NavLink
                                 to={'login'} 
                                 className="text-white text-sm "
-                            >Log in</NavLink>
+                            >Sign in</NavLink>
                             <NavLink
                                 to={'signup'}
                                 className="
@@ -70,7 +70,7 @@ const Header = () => {
                                     hover:opacity-[0.9]
                                     hover:*:opacity-100
                                 "
-                            >Sign up
+                            >Register
                             </NavLink>
                         </>
                     )
