@@ -107,7 +107,10 @@ const GameCard = React.forwardRef(({ game, mode }, ref) => {
 
     return (
         <li className="list-none rounded overflow-hidden game-card" ref={ ref }>
-            <img className="object-cover w-full h-[200px] sm:h-[400px] block" src={ `${BASE_URL}/game/` + game.slug + '/thumbnail.png' } alt={ 'image for ' + game.title } />
+            {game.thumbnail 
+                ?   <img className="object-cover w-full h-[200px] sm:h-[400px] block" src={ `${BASE_URL}/game/` + game.slug + '/thumbnail.png' } alt={ 'image for ' + game.title } />
+                : <div className="w-full h-[200px] sm:h-[400px] bg-gray-700 text-white flex items-center justify-center">Game</div>
+            }
             <div className="relative">
                 <div className="bg-gray-800 absolute bottom-[85%] left-2 p-1 rounded-full">
                     <Badge color={'bg-red-500'}>Game</Badge>
